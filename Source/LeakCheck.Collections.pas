@@ -37,7 +37,7 @@ uses
 
 type
   IDictionary<TKey,TValue> = interface
-    function TryGetValue(const Key: TKey; out Value: TValue): Boolean;
+    function TryGetValue(const Key: TKey; var Value: TValue): Boolean;
     procedure AddOrSetValue(const Key: TKey; const Value: TValue);
     function GetEnumerator: Generics.Collections.TDictionary<TKey,TValue>.TPairEnumerator;
   end;

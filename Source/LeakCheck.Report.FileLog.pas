@@ -86,8 +86,17 @@ begin
   BasePath := TPath.GetDocumentsPath;
   BaseName := ExtractFileName(ParamStr(0));
 {$ELSEIF Defined(MSWINDOWS)}
-  BasePath := ExtractFilePath(ParamStr(0));
-  BaseName := ExtractFileName(ParamStr(0));
+  if MainInstance<>HInstance then
+  begin
+    BasePath := ExtractFilePath(GetModuleName(HInstance));
+    BaseName := ExtractFileName(GetModuleName(HInstance));
+  end
+  else
+  begin
+    BasePath := ExtractFilePath(ParamStr(0));
+    BaseName := ExtractFileName(ParamStr(0));
+  end;
+
 {$ELSEIF Defined(ANDROID)}
   // Note that this requires Read/Write External Storage permissions
   // Write permissions option is enough, reading will be available as well
